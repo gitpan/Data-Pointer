@@ -6,7 +6,7 @@ WriteMakefile(
     'VERSION_FROM' => 'Pointer.pm', # finds $VERSION
     'PREREQ_PM'    => {
     	'Want'        => 0.05,
-#    	'Tie::File'	  => 0.93,
+    	'Tie::File'	  => 0.93,
     	'Tie::IxHash' => 1.12,
     },
 );

@@ -28,7 +28,6 @@
     return bless $opts, __PACKAGE__ . '::' . ucfirst lc $opts->{_subtype};
   }
 
-  ## TODO: figure out why this is called twice (lvalue?)
   sub value : lvalue {
     ref $_[0]->{_value} ? ${$_[0]->{_value}} : $_[0]->{_value};
   }
@@ -163,8 +162,10 @@ Data::Pointer::SCALAR - The SCALAR pointer type
 
 =head1 DESCRIPTION
 
-The SCALAR pointer type is implemented much like strings are in C, however the
-default behaviour is to point to a C<string> and not a C<char>.
+The SCALAR pointer type is implemented much like strings are in C. However the
+default behaviour is to point to a C<string> and not an array of C<char>s.
+You can get C string-like behaviour by C<EXPORT>ing C<char_ptr> or passing
+C<TYPE =E<gt> 'Char'> to the constructer (be it C<new> or C<ptr>).
  
 =head2 METHODS
 
@@ -211,6 +212,7 @@ Return a pointer by the given offset
 
 =head1 AUTHOR
 
-Dan Brook <broquaint@hotmail.com>
+Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
+
 
 =cut

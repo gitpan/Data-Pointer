@@ -3,7 +3,7 @@
 
   require Exporter;
 
-  $VERSION    = 0.54;
+  $VERSION    = 0.6;
   @ISA      = qw( Exporter );
   @EXPORT_OK  = qw( ptr char_ptr );
 
@@ -64,7 +64,7 @@
     return(i_eq(ref $val, 'GLOB', 'IO::File') ? 'IO' : $r)
 		if $r =~ /$core_types/;
 
-    if(ref $val eq 'REF' or $r eq 'REF') {
+    if(i_eq('REF', $r, ref $val)) {
       Carp::croak("not enough information from REF value");
     } else {
       Carp::croak("unrecognised type '$r'");

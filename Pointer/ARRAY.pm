@@ -121,7 +121,7 @@ __END__
 
 =head1 NAME
 
-Data::Pointer::ARRAY - The cARRAY pointer type
+Data::Pointer::ARRAY - The ARRAY pointer type
 
 =head1 SYNOPSIS
 

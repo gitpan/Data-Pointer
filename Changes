@@ -14,3 +14,7 @@ Revision history for Perl extension Sub::Lexical.
 
 0.54  Fri Aug  9 14:54:59  2002
 	- fixed/hacked HASH tests to pass on all platforms
+
+0.6   Sat Aug 10 15:06:57  2002
+	- added the IO pointer type
+	- fixed minor doc issues

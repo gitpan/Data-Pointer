@@ -193,6 +193,10 @@ Return a pointer by the given offset
 
 =back
 
+=head1 THANKS
+
+Gurusamy Sarathy for the oh so nice C<Tie::IxHash>
+
 =head1 AUTHOR
 
 Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
