@@ -1,0 +1,6 @@
+Revision history for Perl extension Sub::Lexical.
+
+0.04  Fri Jul 26 18:33:45 2002
+	- stuck Tie::IxHash under HASH
+	- removed IO as it still has some deref issues
+	- added more docs

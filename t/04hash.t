@@ -23,13 +23,13 @@ isa_ok($ptr, $pkg);
 	# no. 4
 	$ptr->assign(%val);
 	# no. 5 
-	is($ptr->deref, 2, 'deref in scalar context');
+	is($ptr->deref, 'bar', 'deref in scalar context');
 	ok(eq_hash({$ptr->deref}, \%val), 'ptr and %val equal');
 }
 
 # no. 6
 $ptr->incr(1);
-is($ptr->deref, 1, 'increment test');
+is($ptr->deref, 'quux', 'increment test');
 
 {
 	my $var = {qw(ichi ni san shi)};
