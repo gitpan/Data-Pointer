@@ -29,7 +29,7 @@ isa_ok($ptr, $pkg);
 
 # no. 6
 $ptr->incr(1);
-is($ptr->deref, 'quux', 'increment test');
+like($ptr->deref, qr{^ (?: bar | quux ) \z }x, 'increment test');
 
 {
 	my $var = {qw(ichi ni san shi)};
