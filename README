@@ -1,0 +1,33 @@
+Data/Pointer version 0.61
+=========================
+
+Have you ever used pointers in C? Well then using this module should be pretty
+straight-forward. It implements the basic set of pointer operations which I
+thought to be useful. Currently 4 of the basic perl data types are implemented
+(which are SCALAR, ARRAY, HASH and IO) and should behave in an intuitive
+manner which is also documented in their respective docs.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+	Carp
+	Want
+	Tie::File
+	Tie::IxHash
+	Data::Dumper
+
+COPYRIGHT AND LICENCE
+
+Copyright (c) 2002, Dan Brook. All Rights Reserved. This module is free
+software. It may be used, redistributed and/or modified under the same terms
+as Perl itself.

@@ -3,8 +3,6 @@
   $VERSION  = 0.5;
   @ISA    = qw(Data::Pointer);
 
-  push @Data::Pointer::register, __PACKAGE__;
-
   use strict;
   use warnings;
 
@@ -50,8 +48,6 @@
 
   @ISA = qw(Data::Pointer::SCALAR);
 
-  push @Data::Pointer::register, __PACKAGE__;
-
   use strict;
   use warnings;
 
@@ -69,8 +65,6 @@
   package Data::Pointer::SCALAR::String;
 
   @ISA = qw(Data::Pointer::SCALAR);
-
-  push @Data::Pointer::register, __PACKAGE__;
 
   use strict;
   use warnings;
@@ -131,13 +125,11 @@
 
   @ISA = qw(Data::Pointer::SCALAR::String);
 
-  push @Data::Pointer::register, __PACKAGE__;
-
   use strict;
   use warnings;
 
   sub deref : lvalue {
-	substr($_[0]->value, $_[0]->{_index}, 1)
+    substr($_[0]->value, $_[0]->{_index}, 1)
   }
 }
 
@@ -151,14 +143,14 @@ Data::Pointer::SCALAR - The SCALAR pointer type
 
 =head1 SYNOPSIS
 
-	use Data::Pointer qw(ptr);
+    use Data::Pointer qw(ptr);
   
-	my $ptr = ptr( 'foo bar baz' );
+    my $ptr = ptr( 'foo bar baz' );
 
-	print $ptr->plus(4)->deref, $/;                # bar baz
+    print $ptr->plus(4)->deref, $/;                # bar baz
 
-	$ptr->incr(4)->deref = 'quux';
-	print "yup", $/ if $ptr->deref eq 'foo quux';  # yup
+    $ptr->incr(4)->deref = 'quux';
+    print "yup", $/ if $ptr->deref eq 'foo quux';  # yup
 
 =head1 DESCRIPTION
 
@@ -174,39 +166,39 @@ C<TYPE =E<gt> 'Char'> to the constructer (be it C<new> or C<ptr>).
 =item assign($scalar)
 
 Assign the pointer to a different value
-	
-	p = val
+    
+    p = val
 
 =item deref
 
 Dereference the pointer or assign to the value it's pointing to
-	
-	*p
-	*p = val
+    
+    *p
+    *p = val
 
 =item incr([$num])
 
 Increments the position of the pointer (default is 1)
-	
-	p++
+    
+    p++
 
 =item decr([$num])
 
 Decrements the position of the pointer (default is 1)
-	
-	p--
+    
+    p--
 
 =item plus($num)
 
 Return a pointer by the given offset
-	
-	p + 1
+    
+    p + 1
 
 =item minus($num)
 
 Return a pointer by the given offset
-	
-	p - 1
+    
+    p - 1
 
 =back
 
@@ -214,5 +206,10 @@ Return a pointer by the given offset
 
 Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
 
+=head1 COPYRIGHT
+
+Copyright (c) 2002, Dan Brook. All Rights Reserved. This module is free
+software. It may be used, redistributed and/or modified under the same terms
+as Perl itself.
 
 =cut

@@ -3,8 +3,6 @@
   $VERSION  = 0.5;
   @ISA    = qw(Data::Pointer);
   
-  push @Data::Pointer::register, __PACKAGE__;
-  
   use strict;
   use warnings;
   
@@ -25,10 +23,10 @@
   
   sub _init {
     my($class,$opts) = @_;
-	
-	my $hash = defined $opts->{_value} ? $opts->{_value} : {};
-	tie(%{ $opts->{_value} }, 'Tie::IxHash', %$hash);
-	
+    
+    my $hash = defined $opts->{_value} ? $opts->{_value} : {};
+    tie(%{ $opts->{_value} }, 'Tie::IxHash', %$hash);
+    
     bless $opts, $class;
   }
 
@@ -64,8 +62,8 @@
     }
   
 
-	## see. http://www.perlmonks.org/index.pl?node_id=185515
-	my $ref = \$self->value->{$self->_index};
+    ## see. http://www.perlmonks.org/index.pl?node_id=185515
+    my $ref = \$self->value->{$self->_index};
     want(qw/LVALUE ASSIGN LIST/) ?
       @{ $self->value }{ ( $self->_keys )[ $self->{_index} .. $self->_size - 1 ] }
     : want('LIST') ?
@@ -133,15 +131,15 @@ Data::Pointer::HASH - The HASH pointer type
 
 =head1 SYNOPSIS
 
-	use Data::Pointer qw(ptr);
+    use Data::Pointer qw(ptr);
   
-	my $var = { qw( a list of words ) };
-	my $ptr = ptr( $var );
+    my $var = { qw( a list of words ) };
+    my $ptr = ptr( $var );
 
-	print $ptr->plus(1)->deref;           # listofwords
-	print scalar $ptr->plus(1)->deref;    # list
+    print $ptr->plus(1)->deref;           # listofwords
+    print scalar $ptr->plus(1)->deref;    # list
 
-	$ptr->deref = "foo";                  # $var->[0] eq 'foo'
+    $ptr->deref = "foo";                  # $var->[0] eq 'foo'
 
 =head1 DESCRIPTION
 
@@ -158,38 +156,38 @@ should stay the same if new elements are added via a C<$p-E<gt>deref> assignment
 
 Assign the pointer to a different value
 
-	p = val
+    p = val
 
 =item deref
 
 Dereference the pointer or assign to the value it's pointing to
 
-	*p
-	*p = val
+    *p
+    *p = val
 
 =item incr([$num])
 
 Increments the position of the pointer (default is 1)
 
-	p++
+    p++
 
 =item decr([$num])
 
 Decrements the position of the pointer (default is 1)
 
-	p--
+    p--
 
 =item plus($num)
 
 Return a pointer by the given offset
 
-	p + 1
+    p + 1
 
 =item minus($num)
 
 Return a pointer by the given offset
 
-	p - 1
+    p - 1
 
 =back
 
@@ -200,5 +198,11 @@ Gurusamy Sarathy for the oh so nice C<Tie::IxHash>
 =head1 AUTHOR
 
 Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
+
+=head1 COPYRIGHT
+
+Copyright (c) 2002, Dan Brook. All Rights Reserved. This module is free
+software. It may be used, redistributed and/or modified under the same terms
+as Perl itself.
 
 =cut

@@ -1,4 +1,4 @@
-Revision history for Perl extension Sub::Lexical.
+Revision history for Perl extension Data::Pointer
 
 0.04  Fri Jul 26 18:33:45 2002
 	- stuck Tie::IxHash under HASH
@@ -10,11 +10,15 @@ Revision history for Perl extension Sub::Lexical.
 	- tidied up docs
 
 0.53  Fri Aug  2 19:29:09  2002
-	- removed Tie::File dependency
+	- removed Tie::File dependency (temporarily)
 
 0.54  Fri Aug  9 14:54:59  2002
 	- fixed/hacked HASH tests to pass on all platforms
 
 0.6   Sat Aug 10 15:06:57  2002
-	- added the IO pointer type
+	- added the IO pointer type (Tie::File now back)
 	- fixed minor doc issues
+
+0.61  Sun Sep 29 17:14:23  2002
+	- misc changes to docs
+	- added README file

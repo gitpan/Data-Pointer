@@ -3,11 +3,11 @@
 
   require Exporter;
 
-  $VERSION    = 0.6;
-  @ISA      = qw( Exporter );
+  $VERSION    = 0.61;
+  @ISA        = qw( Exporter );
   @EXPORT_OK  = qw( ptr char_ptr );
 
-  use vars qw( @register @core_types );
+  use vars qw( @core_types );
 
   @core_types = qw/SCALAR ARRAY HASH GLOB IO::File/;
 
@@ -20,7 +20,7 @@
   {
     my @options = qw(value type subtype size fatal);
     sub new {
-      my $class  = shift;
+      my $class = shift;
       my %opts  = @_;
 
       Carp::croak('how dare you call *me* as a function!')
@@ -32,7 +32,7 @@
       $self{_index} = 0;
       $self{_fatal} = defined $self{_fatal} && $self{_fatal};
 
-	  $self{_type} = _find_type($self{_value}) unless exists $self{_type};
+      $self{_type} = _find_type($self{_value}) unless exists $self{_type};
       my $obj = "Data::Pointer::$self{_type}";
 
       ## don't let the module know what it's using ...
@@ -47,9 +47,9 @@
     my $self = UNIVERSAL::isa($_[0], __PACKAGE__) ? shift : undef;
 
     my $first = shift;
-	my $rest  = '(?:'. join('|', @_) .')';
+    my $rest  = '(?:'. join('|', @_) .')';
 
-	return $first =~ m< ^ $rest \z >xi;
+    return $first =~ m< ^ $rest \z >xi;
   }
   
   sub _find_type {
@@ -62,7 +62,7 @@
 
     my $r = ref \$val;
     return(i_eq(ref $val, 'GLOB', 'IO::File') ? 'IO' : $r)
-		if $r =~ /$core_types/;
+      if $r =~ /$core_types/;
 
     if(i_eq('REF', $r, ref $val)) {
       Carp::croak("not enough information from REF value");
@@ -135,15 +135,15 @@ Data::Pointer - Implementation of the concept of C pointers for perl data types
 
 =head1 SYNOPSIS
 
-	use Data::Pointer qw(ptr);
+    use Data::Pointer qw(ptr);
   
-	my $var = [ qw( a list of words ) ];
-	my $ptr = ptr( $var );
+    my $var = [ qw( a list of words ) ];
+    my $ptr = ptr( $var );
 
-	print $ptr->plus(1)->deref;           # listofwords
-	print scalar $ptr->plus(1)->deref;    # list
+    print $ptr->plus(1)->deref;           # listofwords
+    print scalar $ptr->plus(1)->deref;    # list
 
-	$ptr->deref = "foo";                  # $var->[0] eq 'foo'
+    $ptr->deref = "foo";                  # $var->[0] eq 'foo'
 
 =head1 DESCRIPTION
 
@@ -166,11 +166,11 @@ The class constructor method (see. C<mutant> for the object constructor method)
 It takes arguments in the form of key value pairs and takes the following
 parameters
 
-	value   => What the pointer will be pointing, doesn't have to be a reference
-	type    => The type of pointer e.g SCALAR
-	subtype => The subtype of the type of pointer e.g CHAR
-	size    => Amount of memory to allocate (NOTE: not currently used)
-	fatal   => If set, the program will die if a pointer goes out of bounds
+    value   => What the pointer will be pointing, doesn't have to be a reference
+    type    => The type of pointer e.g SCALAR
+    subtype => The subtype of the type of pointer e.g CHAR
+    size    => Amount of memory to allocate (NOTE: not currently used)
+    fatal   => If set, the program will die if a pointer goes out of bounds
 
 =item mutant(%options)
 
@@ -200,5 +200,11 @@ Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
 =head1 SEE ALSO
 
 K&R, Tie::File
+
+=head1 COPYRIGHT
+
+Copyright (c) 2002, Dan Brook. All Rights Reserved. This module is free
+software. It may be used, redistributed and/or modified under the same terms
+as Perl itself.
 
 =cut

@@ -3,8 +3,6 @@
   $VERSION  = 0.5;
   @ISA    = qw(Data::Pointer);
   
-  push @Data::Pointer::register, __PACKAGE__;
-  
   use strict;
   use warnings;
 
@@ -125,15 +123,15 @@ Data::Pointer::ARRAY - The ARRAY pointer type
 
 =head1 SYNOPSIS
 
-	use Data::Pointer qw(ptr);
+    use Data::Pointer qw(ptr);
   
-	my $var = [ qw( a list of words ) ];
-	my $ptr = ptr( $var );
+    my $var = [ qw( a list of words ) ];
+    my $ptr = ptr( $var );
 
-	print $ptr->plus(1)->deref;           # listofwords
-	print scalar $ptr->plus(1)->deref;    # list
+    print $ptr->plus(1)->deref;           # listofwords
+    print scalar $ptr->plus(1)->deref;    # list
 
-	$ptr->deref = "foo";                  # $var->[0] eq 'foo'
+    $ptr->deref = "foo";                  # $var->[0] eq 'foo'
 
 =head1 DESCRIPTION
 
@@ -148,44 +146,50 @@ and dereferenced as one would expect.
 =item assign($array_ref)
 
 Assign the pointer to a different value
-	
-	p = val
+    
+    p = val
 
 =item deref
 
 Dereference the pointer or assign to the value it's pointing to
-	
-	*p
-	*p = val
+    
+    *p
+    *p = val
 
 =item incr([$num])
 
 Increments the position of the pointer (default is 1)
-	
-	p++
+    
+    p++
 
 =item decr([$num])
 
 Decrements the position of the pointer (default is 1)
-	
-	p--
+    
+    p--
 
 =item plus($num)
 
 Return a pointer by the given offset
 
-	p + 1
+    p + 1
 
 =item minus($num)
 
 Return a pointer by the given offset
 
-	p - 1
+    p - 1
 
 =back
 
 =head1 AUTHOR
 
 Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
+
+=head1 COPYRIGHT
+
+Copyright (c) 2002, Dan Brook. All Rights Reserved. This module is free
+software. It may be used, redistributed and/or modified under the same terms
+as Perl itself.
 
 =cut
