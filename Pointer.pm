@@ -3,13 +3,13 @@
 
   require Exporter;
 
-  $VERSION    = 0.3;
+  $VERSION    = 0.51;
   @ISA      = qw( Exporter );
   @EXPORT_OK  = qw( ptr char_ptr );
 
   use vars qw( @register @core_types );
 
-  @core_types = qw/SCALAR ARRAY HASH GLOB/;
+  @core_types = qw/SCALAR ARRAY HASH GLOB IO::File/;
 
   use strict;
   use warnings;
@@ -43,18 +43,28 @@
     }
   }
 
+  sub i_eq {
+    my $self = UNIVERSAL::isa($_[0], __PACKAGE__) ? shift : undef;
+
+    my $first = shift;
+	my $rest  = '(?:'. join('|', @_) .')';
+
+	return $first =~ m< ^ $rest \z >xi;
+  }
+  
   sub _find_type {
     my $val = shift;
 
     my $core_types = '^(?:' . join('|', @core_types) . ')$';
 
-    return(ref $val eq 'GLOB' ? 'IO' : ref $val)
+    return(i_eq(ref $val, 'GLOB', 'IO::File') ? 'IO' : ref $val)
       if ref($val) =~ /$core_types/;
 
     my $r = ref \$val;
-    return($r eq 'GLOB' ? 'IO' : $r) if $r =~ /$core_types/;
+    return(i_eq(ref $val, 'GLOB', 'IO::File') ? 'IO' : $r)
+		if $r =~ /$core_types/;
 
-    if($val eq 'REF' or $r eq 'REF') {
+    if(ref $val eq 'REF' or $r eq 'REF') {
       Carp::croak("not enough information from REF value");
     } else {
       Carp::croak("unrecognised type '$r'");
@@ -150,7 +160,7 @@ implement GLOB pointers if it's at all feasible
 
 =over 4
 
-=item new(%)
+=item new(%options)
 
 The class constructor method (see. C<mutant> for the object constructor method)
 It takes arguments in the form of key value pairs and takes the following
@@ -162,7 +172,7 @@ parameters
 	size    => Amount of memory to allocate (NOTE: not currently used)
 	fatal   => If set, the program will die if a pointer goes out of bounds
 
-=item mutant(%)
+=item mutant(%options)
 
 Will mutate the object according to the given parameters
 
@@ -172,12 +182,12 @@ Will mutate the object according to the given parameters
 
 =over 4
 
-=item ptr($;%)
+=item ptr($val[, %options])
 
 A wrapper around new(). Just provide it with a value and it'll return the
 correct pointer object.
 
-=item char_ptr($;%)
+=item char_ptr($string[, %options])
 
 Creates a character pointer
 
@@ -185,7 +195,7 @@ Creates a character pointer
 
 =head1 AUTHOR
 
-Dan Brook <broquaint@hotmail.com>
+Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
 
 =head1 SEE ALSO
 

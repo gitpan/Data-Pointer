@@ -1,6 +1,6 @@
 {
   package Data::Pointer::SCALAR;
-  $VERSION  = 0.3;
+  $VERSION  = 0.5;
   @ISA    = qw(Data::Pointer);
 
   push @Data::Pointer::register, __PACKAGE__;
@@ -170,35 +170,41 @@ default behaviour is to point to a C<string> and not a C<char>.
 
 =over 4
 
-=item assign($)
+=item assign($scalar)
 
 Assign the pointer to a different value
+	
 	p = val
 
 =item deref
 
 Dereference the pointer or assign to the value it's pointing to
+	
 	*p
 	*p = val
 
-=item incr(;$)
+=item incr([$num])
 
 Increments the position of the pointer (default is 1)
+	
 	p++
 
-=item decr(;$)
+=item decr([$num])
 
 Decrements the position of the pointer (default is 1)
+	
 	p--
 
-=item plus($)
+=item plus($num)
 
 Return a pointer by the given offset
+	
 	p + 1
 
-=item minus($)
+=item minus($num)
 
 Return a pointer by the given offset
+	
 	p - 1
 
 =back

@@ -23,7 +23,7 @@ isa_ok($ptr, $pkg);
 	# no. 4
 	$ptr->assign(%val);
 	# no. 5 
-	is($ptr->deref, 'bar', 'deref in scalar context');
+	like($ptr->deref, qr{^ (?: bar | quux ) \z }x, 'deref in scalar context');
 	ok(eq_hash({$ptr->deref}, \%val), 'ptr and %val equal');
 }
 
@@ -36,8 +36,11 @@ is($ptr->deref, 'quux', 'increment test');
 	$ptr->assign($var);
 	# no. 7
 	$ptr->deref = 'two';
-	is($var->{ichi}, 'two', 'assign scalar to ptr element');
-
+	{
+		no warnings 'void';
+		ok(($var->{ichi} eq 'two') or ($var->{san} eq 'two'),
+		   'assign scalar to ptr element');
+	}
 	# no. 8
 	($ptr->deref) = qw(two four);
 	ok(eq_hash({$ptr->deref}, {qw(ichi two san four)}), 'assign list to ptr');

@@ -1,6 +1,6 @@
 {
   package Data::Pointer::HASH;
-  $VERSION  = 0.3;
+  $VERSION  = 0.5;
   @ISA    = qw(Data::Pointer);
   
   push @Data::Pointer::register, __PACKAGE__;
@@ -129,7 +129,7 @@ __END__
 
 =head1 NAME
 
-Data::Pointer::HASH - The SCALAR pointer type
+Data::Pointer::HASH - The HASH pointer type
 
 =head1 SYNOPSIS
 
@@ -148,47 +148,53 @@ Data::Pointer::HASH - The SCALAR pointer type
 The HASH pointer type exists more for completeness than utility. The pointer
 will be initialised to the first element from a C<keys> call on the hash that
 it points to. Since it uses C<Tie::IxHash> for accessing the hash the order
-should stay the same if new elements are added via a C<$p-&gt;deref> assignment
+should stay the same if new elements are added via a C<$p-E<gt>deref> assignment
 
 =head2 METHODS
 
 =over 4
 
-=item assign($)
+=item assign($hash_ref)
 
 Assign the pointer to a different value
+
 	p = val
 
 =item deref
 
 Dereference the pointer or assign to the value it's pointing to
+
 	*p
 	*p = val
 
-=item incr(;$)
+=item incr([$num])
 
 Increments the position of the pointer (default is 1)
+
 	p++
 
-=item decr(;$)
+=item decr([$num])
 
 Decrements the position of the pointer (default is 1)
+
 	p--
 
-=item plus($)
+=item plus($num)
 
 Return a pointer by the given offset
+
 	p + 1
 
-=item minus($)
+=item minus($num)
 
 Return a pointer by the given offset
+
 	p - 1
 
 =back
 
 =head1 AUTHOR
 
-Dan Brook <broquaint@hotmail.com>
+Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
 
 =cut

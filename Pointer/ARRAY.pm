@@ -1,6 +1,6 @@
 {
   package Data::Pointer::ARRAY;
-  $VERSION  = 0.3;
+  $VERSION  = 0.5;
   @ISA    = qw(Data::Pointer);
   
   push @Data::Pointer::register, __PACKAGE__;
@@ -121,7 +121,7 @@ __END__
 
 =head1 NAME
 
-Data::Pointer::ARRAY - The SCALAR pointer type
+Data::Pointer::ARRAY - The cARRAY pointer type
 
 =head1 SYNOPSIS
 
@@ -145,41 +145,47 @@ and dereferenced as one would expect.
 
 =over 4
 
-=item assign($)
+=item assign($array_ref)
 
 Assign the pointer to a different value
+	
 	p = val
 
 =item deref
 
 Dereference the pointer or assign to the value it's pointing to
+	
 	*p
 	*p = val
 
-=item incr(;$)
+=item incr([$num])
 
 Increments the position of the pointer (default is 1)
+	
 	p++
 
-=item decr(;$)
+=item decr([$num])
 
 Decrements the position of the pointer (default is 1)
+	
 	p--
 
-=item plus($)
+=item plus($num)
 
 Return a pointer by the given offset
+
 	p + 1
 
-=item minus($)
+=item minus($num)
 
 Return a pointer by the given offset
+
 	p - 1
 
 =back
 
 =head1 AUTHOR
 
-Dan Brook <broquaint@hotmail.com>
+Dan Brook C<E<lt>broquaint@hotmail.comE<gt>>
 
 =cut
