@@ -11,3 +11,6 @@ Revision history for Perl extension Sub::Lexical.
 
 0.53  Fri Aug  2 19:29:09  2002
 	- removed Tie::File dependency
+
+0.54  Fri Aug  9 14:54:59  2002
+	- fixed/hacked HASH tests to pass on all platforms

@@ -3,7 +3,7 @@
 
   require Exporter;
 
-  $VERSION    = 0.51;
+  $VERSION    = 0.54;
   @ISA      = qw( Exporter );
   @EXPORT_OK  = qw( ptr char_ptr );
 

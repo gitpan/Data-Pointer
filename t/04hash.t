@@ -22,6 +22,9 @@ isa_ok($ptr, $pkg);
 	my %val = qw(foo bar baz quux);
 	# no. 4
 	$ptr->assign(%val);
+	
+	# HACK: can't rely on order due to platforms hashing keys differently
+	# see also. tests 6, 7 and 8
 	# no. 5 
 	like($ptr->deref, qr{^ (?: bar | quux ) \z }x, 'deref in scalar context');
 	ok(eq_hash({$ptr->deref}, \%val), 'ptr and %val equal');
@@ -43,7 +46,10 @@ like($ptr->deref, qr{^ (?: bar | quux ) \z }x, 'increment test');
 	}
 	# no. 8
 	($ptr->deref) = qw(two four);
-	ok(eq_hash({$ptr->deref}, {qw(ichi two san four)}), 'assign list to ptr');
+	ok((
+	    eq_hash({$ptr->deref}, {qw(ichi two san four)}) or
+        eq_hash({$ptr->deref}, {qw(ichi four san two)})
+	   ), 'assign list to ptr');
 }
 
 # no. 9
